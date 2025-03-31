@@ -10,9 +10,14 @@ class Minesweeper:
         if mines > rows * cols:
             raise ValueError(f"Number of mines ({mines}) exceeds total cells ({rows * cols})")
         # intialize empty grid
-        self.board = [[0 for _ in range(cols)] for _ in range(rows)]
+        self.board = []
+        for _ in range(rows):
+            row = []
+            for _ in range(cols):
+                row.append(0)
+            self.board.append(row)
 
-    def generate_board(self):
+    def get_board(self):
         # Return the grid
         return self.board
 
@@ -42,11 +47,11 @@ if __name__ == "__main__":
     try:
         game = Minesweeper(5, 5, 5)
         print("Initial board:")
-        for row in game.generate_board():
+        for row in game.get_board():
             print(row)
         mines = game.place_mines([2, 2])
         print("\nMine positions:", mines)
         
-        game_invalid = Minesweeper(2, 2, 5)
+        # game_invalid = Minesweeper(2, 2, 5)
     except ValueError as e:
         print(f"Error: {e}")
